@@ -6,7 +6,7 @@ public class User {
     private String username;
     private String password;
     private String posts;
-    private int userID;
+    private long userID;
     private List<Group> groups;
 
     public String getUsername() {
@@ -33,11 +33,11 @@ public class User {
         this.posts = posts;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 }

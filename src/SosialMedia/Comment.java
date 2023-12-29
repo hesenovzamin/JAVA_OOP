@@ -3,7 +3,7 @@ package SosialMedia;
 import java.time.LocalDate;
 
 public class Comment {
-    private  int commentID;
+    private  long commentID;
     private String content;
     private LocalDate createDate;
 

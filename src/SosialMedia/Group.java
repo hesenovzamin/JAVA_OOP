@@ -3,7 +3,7 @@ package SosialMedia;
 import java.util.List;
 
 public class Group {
-    private  int groupID;
+    private  long groupID;
     private String name;
     private List<User> members;
     private User admin;
