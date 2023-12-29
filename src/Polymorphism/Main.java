@@ -8,11 +8,13 @@ import Task2.Worker;
 
 public class Main {
 
-    public static void main(String[] args) {
-
-            Cat cat = new Cat();
-            cat.makeSound();
-
-
+    public class Test {
+        public static void main(String[] args) {
+            Test t = null;
+            t.hello();
+        }
+        static void hello() {
+            System.out.println("Hello");
+        }
     }
 }
