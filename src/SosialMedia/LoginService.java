@@ -5,11 +5,24 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class LoginService {
+
+    private   User currentUser;
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
     public LoginService() {
 
-        this.users = new ArrayList<>(); // Listeyi başlatmak için bu satırı ekleyin.
+        this.users = new ArrayList<>();
+
     }
     public List<User> users;
+
 
     public List<User> getUsers() {
         return users;
@@ -19,9 +32,18 @@ public class LoginService {
         this.users = users;
     }
 
+    public boolean createGroup(){
+        return  true;
+    }
+
     public boolean  login(String username,String password){
         for (int i = 0; i < users.size(); i++) {
-            return Objects.equals(users.get(i).getUsername(), username) && Objects.equals(users.get(i).getPassword(), password);
+           if(Objects.equals(users.get(i).getUsername(), username) && Objects.equals(users.get(i).getPassword(), password))
+           {
+               setCurrentUser(users.get(i));
+               return true;
+           }
+
         }
         return false;
     }
@@ -39,7 +61,6 @@ public class LoginService {
             return  true;
         }
         return false;
-
     }
 
 }

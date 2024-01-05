@@ -1,6 +1,6 @@
 package SosialMedia;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void showMenu(){
@@ -33,6 +33,11 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+        List<Group> groups  = new ArrayList<>();
+        List<Post> posts  = new ArrayList<>();
+
+        User currentUser = new User();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -76,14 +81,35 @@ public class Main {
                                 case 1:
                                     groupManagement();
                                     boolean group_loop = true;
-                                    int group_operation = scanner.nextInt();
+
                                     while(group_loop){
+                                        int group_operation = scanner.nextInt();
                                         switch(group_operation) {
                                             case 1:
+                                                // Create Group
+                                                System.out.println("Group Name");
+                                                String group_name = scanner.next();
+                                                Random random = new Random();
+                                                int randomNumber = random.nextInt(1000000);
+                                                Group group = new Group();
+                                                group.setName(group_name);
+                                                group.setGroupID(randomNumber);
+                                                group.setAdmin(loginService.getCurrentUser());
+                                                group.addMember(loginService.getCurrentUser());
+                                                loginService.getCurrentUser().setGroups(group);
+                                                groups.add(group);
+                                                System.out.println("Group Created !");
+                                                groupManagement();
                                                 // code block
                                                 break;
                                             case 2:
-                                                // code block
+                                                System.out.println("Groups");
+                                                 // Views Group
+                                                for (int i = 0; i < groups.size(); i++) {
+                                                    System.out.println(i + 1 + "Group ID  " + groups.get(i).getGroupID() +   "Group Name   " + groups.get(i).getName());
+
+                                                }
+
                                                 break;
                                             default:
                                                 // code block
@@ -93,14 +119,30 @@ public class Main {
                                 case 2:
                                     postManagement();
                                     boolean post_loop = true;
-                                    int post_operation = scanner.nextInt();
                                     while(post_loop){
+                                        int post_operation = scanner.nextInt();
                                         switch(post_operation) {
                                             case 1:
-                                                // code block
+                                                System.out.println("Post Content");
+                                                String post_content = scanner.next();
+                                                Random random = new Random();
+                                                int randomNumber = random.nextInt(1000000);
+                                                Post post = new Post();
+                                                post.setContent(post_content);
+                                                post.setPostId(randomNumber);
+                                                post.setAuthor(loginService.getCurrentUser());
+                                                loginService.getCurrentUser().setPost(post);
+                                                posts.add(post);
+                                                System.out.println("Post Created !");
+                                                postManagement();
+
                                                 break;
                                             case 2:
-                                                // code block
+                                                System.out.println("Posts");
+                                                // Views Group
+                                                for (int i = 0; i < loginService.getCurrentUser().getPosts().size(); i++) {
+                                                    System.out.println(i + 1 + "      Post ID  " + loginService.getCurrentUser().getPosts().get(i).getPostId() + " Post Content   " + loginService.getCurrentUser().getPosts().get(i).getContent());
+                                                }
                                                 break;
                                             default:
                                                 // code block
@@ -118,6 +160,7 @@ public class Main {
                     }
                     else{
                         System.out.println("Bir problem yasandi");
+                        showMenu();
                     }
                     break;
                 case 3:
